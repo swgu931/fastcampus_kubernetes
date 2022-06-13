@@ -257,7 +257,7 @@ gcloud compute instances create worker-${i} \
 --image-project ubuntu-os-cloud \
 --machine-type e2-standard-2 \
 --metadata pod-cidr=10.200.${i}.0/24 \
---private-network-ip 10.240.0.1${i} \
+--private-network-ip 10.240.0.2${i} \
 --scopes compute-rw,storage-ro,service-management,service-control,logging-write,monitoring \
 --subnet k8s-nodes \
 --tags fastcampus-k8s,worker
