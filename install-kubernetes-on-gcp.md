@@ -15,18 +15,19 @@ gcloud compute networks subnets create k8s-nodes \
  --range 10.240.0.0/24 
 
 gcloud compute firewall-rules create fastcampus-k8s-allow-internal \
- --allow tcp, udp, icmp \
+ --allow tcp,udp,icmp \
  --network fastcampus-k8s \
  --source-ranges 10.240.0.0./24
 
 gcloud compute firewall-rules create fastcampus-k8s-allow-external \
- --allow tcp:22, tcp:6443, icmp \
+ --allow tcp:22,tcp:6443,icmp \
  --network fastcampus-k8s \
  --source-ranges 0.0.0.0/0
 
 gcloud compute addresses list
-gcloud compute addresses create fascampus-k8s  # 외부IP설정
-
+# 외부IP설정
+gcloud compute addresses create fascampus-k8s \
+ --region $(gcloud config get-value compute/region)
 
 gcloud compute routers create k8s-router \
  --network fastcampus-k8s \
