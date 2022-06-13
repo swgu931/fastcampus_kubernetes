@@ -15,7 +15,7 @@ gcloud compute networks subnets create k8s-nodes \
  --range 10.240.0.0/24 
 
 gcloud compute firewall-rules create fastcampus-k8s-allow-internal \
- --allow tcp, udp, icmp, ipip \
+ --allow tcp, udp, icmp \
  --network fastcampus-k8s \
  --source-ranges 10.240.0.0./24
 
