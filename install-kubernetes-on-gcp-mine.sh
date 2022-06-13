@@ -59,7 +59,7 @@ gcloud compute routers nats create k8s-cloudrobotics-gcp-nat \
  --auto-allocate-nat-external-ips
 
 # =======================================================
-
+for i in 0: do
 gcloud compute instances create k8s-cloudrobotics-gcp-controller \
 --async \
 --boot-disk-size 200GB \
@@ -67,10 +67,30 @@ gcloud compute instances create k8s-cloudrobotics-gcp-controller \
 --image-family ubuntu-2004-lts \
 --image-project ubuntu-os-cloud \
 --machine-type e2-standard-2 \
---private-network-ip 10.240.0.10 \
+--private-network-ip 10.240.0.1${i} \
 --scopes compute-rw,storage-ro,service-management,service-control,logging-write,monitoring \
 --subnet k8s-subnet-node \
 --tags k8s-cloudrobotics-gcp,controller \
 --address $PUBLIC_IP
 
 gcloud compute instances list
+
+
+#==========================================================
+for i in 0 1: do
+gcloud compute instances create worker-${i} \
+--async \
+--boot-disk-size 200GB \
+--can-ip-forward \
+--image-family ubuntu-2004-lts \
+--image-project ubuntu-os-cloud \
+--machine-type e2-standard-2 \
+--metadata pod-cidr=10.200.${i}.0/24 \
+--private-network-ip 10.240.0.2${i} \
+--scopes compute-rw,storage-ro,service-management,service-control,logging-write,monitoring \
+--subnet k8s-subnet-node \
+--tags k8s-cloudrobotics-gcp,worker
+
+gcloud compute instances list
+
+#===========================================================
