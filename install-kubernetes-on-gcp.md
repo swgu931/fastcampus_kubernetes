@@ -6,6 +6,9 @@
 ```
 gcloud init
 gcloud config list
+gcloud config set compute/region asia-northeast3
+gcloud config set compute/zone asia-northeast3-a
+gcloud config set project my-project
 gcloud compute networks create fastcampus-k8s --subnet-mode custom
 gcloud compute networks subnets create k8s-nodes \
  --network fastcampus-k8s \
