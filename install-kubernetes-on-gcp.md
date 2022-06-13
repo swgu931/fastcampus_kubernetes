@@ -22,7 +22,7 @@ gcloud compute firewall-rules create fastcampus-k8s-allow-internal \
 gcloud compute firewall-rules create fastcampus-k8s-allow-external \
  --allow tcp:22, tcp:6443, icmp \
  --network fastcampus-k8s \
- --source-range 0.0.0.0/0
+ --source-ranges 0.0.0.0/0
 
 gcloud compute addresses list
 gcloud compute addresses create fascampus-k8s  # 외부IP설정
